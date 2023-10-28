@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="to-do-list">
+        <div class="to-do__container" id="to-do-list">
+            <h1 class="to-do__title">What's up,...</h1>
+            <h3 class="to-do__subtitle font-f-400">CREATE A TODO</h3>
+            <p class="to-do__text">Whats's on your todo list?</p>
+            
+            <form class="category">
+                <div>
+                    <input class="to-do__input" id="task-input" type="text" placeholder="e.g. get a milk">
+                </div>
+                <p class="to-do__text">Pick a category</p>
+                <div class="categoty__blocks">
+                    <label class="category__block">
+                        <input type="checkbox" class="category__btn">
+                        <span class="category__btn-custom bussines-btn"></span>
+                        Bussines
+                    </label>
+                    <label class="category__block">
+                        <input type="checkbox" class="category__btn">
+                        <span class="category__btn-custom personal-btn"></span>
+                        Personal
+                    </label>
+                </div>
+                <div class="add-btn__block">
+                    <button class="add__btn font-f-400">Add todo</button>
+                </div>
+            </form>
+            
+        </div>
+    </section>
+    <section class="to-do-task">
+        <div class="to-do__container">
+            <h4 class="font-f-400">TODO LIST</h4>
+            <div class="task-list"> 
+                <ul>
+                    <li class="task-list__task">
+                        <div class="task-list__text">
+                            <input class="task__checkbox" type="checkbox">
+                            <span class="task__checkbox-custom"></span>
+                            Lorem ipsum dolor sit.
+                        </div>
+                        <div >
+                            <button class="task__btn edit-btn">Edit</button>
+                            <button class="task__btn delete-btn">Delete</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

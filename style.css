@@ -1,0 +1,121 @@
+*{
+    font-family: "Rubik";
+}
+
+body{
+    background-color: #c7bccc;
+}
+li{
+    list-style-type: none;
+}
+button{
+    cursor: pointer;
+}
+.to-do__container{
+    display: block;
+    margin: 0 auto;
+    max-width: 650px;
+    background:none;
+}
+.font-f-400{
+    font-weight: 400;
+}
+.to-do__input{
+    border: none;
+    padding: 5px;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+}
+.category{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.category__block{
+    cursor: pointer;
+    display: flex;
+    width: 250px;
+    height: 90px;
+    background-color: #fff;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.categoty__blocks{
+    display: flex;
+    justify-content: space-around;
+}
+.category__btn{
+    display: none;
+}
+.category__btn-custom{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.bussines-btn{
+    border:2px solid #4A4FD6;
+}
+
+.personal-btn{
+    border: 2px solid #e13699;
+}
+.add__btn{
+    width: 100%;
+    height: 63px;
+    border-radius: 10px;
+    background: #4A4FD6;
+    border: none;
+    margin-top: 20px;
+    font-size: 20px;
+    color: #FFF;
+    font-size: 16px;
+    cursor: pointer;
+}
+.task__btn{
+    width: 70px;
+    height: 35px;
+    color: #FFF;
+    border-radius: 10px;
+    border: none;
+}
+.task-list__task{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    padding: 20px 5px;
+    border-radius: 10px;
+    background: white;
+}
+.task-list__text{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.task__checkbox{
+    display: none;
+}
+.task__checkbox-custom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #4A4FD6;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.edit-btn{
+    background: #CF318B;
+}
+.delete-btn{
+    background: #e55113;
+}
