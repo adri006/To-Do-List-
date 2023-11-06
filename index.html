@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
 <body>
     <section class="to-do-list">
         <div class="to-do__container" id="to-do-list">
-            <h1 class="to-do__title">What's up,...</h1>
+            <h1 class="to-do__title">What's up,<span class="name" contenteditable="true" id="editableName"></span></h1>
             <h3 class="to-do__subtitle font-f-400">CREATE A TODO</h3>
             <p class="to-do__text">Whats's on your todo list?</p>
             
@@ -41,19 +41,316 @@
     <section class="to-do-task">
         <div class="to-do__container">
             <h4 class="font-f-400">TODO LIST</h4>
-            <div class="task-list"> 
-                <ul>
-                    <li class="task-list__task">
-                        <div class="task-list__text">
+            <div class="task-list__block"> 
+                <ul class="task-list">
+                     <li class="task-list__task">
+                        <label class="task-list__text">
                             <input class="task__checkbox" type="checkbox">
-                            <span class="task__checkbox-custom"></span>
-                            Lorem ipsum dolor sit.
-                        </div>
+                            <div class="task__checkbox-custom"></div>
+                            <p class="task__text">${taskText}</p>
+                        </label>
                         <div >
-                            <button class="task__btn edit-btn">Edit</button>
-                            <button class="task__btn delete-btn">Delete</button>
+                            <button id="edit-button" class="task__btn edit-btn" data-action="edit">Edit</button>
+                            <button id="delete-button" class="task__btn delete-btn" data-action="delete">Delete</button>
                         </div>
-                    </li>
+                    </li> 
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js">
+        const todoList = document.querySelector("#to-do-list");
+        const taskInput = document.querySelector("#task-input");
+        const taskList = document.querySelector("#task-list");
+        const editableName = document.querySelectorAll(".editableName");
+        const editButtons = document.querySelectorAll(".edit-btn");
+
+    editableName.addEventListener("click", function () {
+    this.setAttribute("contentEditable", "true");
+    this.focus();
+    });
+
+    // Добавление задачи
+    todoList.addEventListener("submit", addTask);
+
+    // Удаление задачи
+    taskList.addEventListener("click", deleteTask);
+
+    function addTask(event) {
+    event.preventDefault();
+
+    const taskText = taskInput.value;
+
+    const taskHTML = ` 
+    <li class="task-list__task">
+        <label class="task-list__text">
+            <input class="task__checkbox" type="checkbox">
+            <div class="task__checkbox-custom"></div>
+            <p class="task__text">${taskText}</p>
+        </label>
+        <div >
+            <button id="edit-button" class="task__btn edit-btn" data-action="edit">Edit</button>
+            <button id="delete-button" class="task__btn delete-btn" data-action="delete">Delete</button>
+        </div>
+    </li>`
+    ;
+
+    taskList.insertAdjacentHTML("beforeend", taskHTML);
+
+    taskInput.value = "";
+    taskInput.focus();
+    }
+
+    function deleteTask(event) {
+    if (event.target.dataset.action === "delete") {
+        const parenNode = event.target.closest(".task-list__task");
+        parenNode.remove();
+    }
+    }
+
+    // const editButtons = document.querySelectorAll('.edit-button');
+
+    editButtons.forEach(function (editButton) {
+        editButton.addEventListener("click", function () {
+        // Найдите родительский элемент .task-list__task для данной кнопки
+        const taskListItem = this.closest(".task-list__task");
+
+        // Найдите элемент .task__text внутри .task-list__task
+        const taskTextElement = taskListItem.querySelector(".task__text");
+
+        // Сделайте элемент редактируемым
+        taskTextElement.contentEditable = true;
+
+        // Фокусируйтесь на элементе для удобства редактирования
+        taskTextElement.focus();
+
+        // Добавьте обработчик события для сохранения изменений при потере фокуса
+        taskTextElement.addEventListener("blur", function () {
+        // Сделайте элемент нередактируемым после сохранения
+        this.contentEditable = false;
+        });
+        });
+    });
+
+    </script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="to-do-list">
+        <div class="to-do__container" id="to-do-list">
+            <h1 class="to-do__title">What's up,<span class="name" contenteditable="true" id="editableName"></span></h1>
+            <h3 class="to-do__subtitle font-f-400">CREATE A TODO</h3>
+            <p class="to-do__text">What's on your to-do list?</p>
+            
+            <form class="category">
+                <div>
+                    <input class="to-do__input" id="task-input" type="text" placeholder="e.g. get milk">
+                </div>
+                <p class="to-do__text">Pick a category</p>
+                <div class="category__blocks">
+                    <label class="category__block">
+                        <input type="checkbox" class="category__btn">
+                        <span class="category__btn-custom business-btn"></span>
+                        Business
+                    </label>
+                    <label class="category__block">
+                        <input type="checkbox" class="category__btn">
+                        <span class="category__btn-custom personal-btn"></span>
+                        Personal
+                    </label>
+                </div>
+                <div class="add-btn__block">
+                    <button class="add__btn font-f-400" onclick="addTask(event)">Add todo</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="to-do-task">
+        <div class="to-do__container">
+            <h4 class="font-f-400">TODO LIST</h4>
+            <div class="task-list__block"> 
+                <ul class="task-list" id="task-list">
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        
+    </script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="to-do-list">
+        <div class="to-do__container" id="to-do-list">
+            <h1 class="to-do__title">What's up,<span class="name" contenteditable="true" id="editableName"></span></h1>
+            <h3 class="to-do__subtitle font-f-400">CREATE A TODO</h3>
+            <p class="to-do__text">What's on your to-do list?</p>
+            
+            <form class="category">
+                <div>
+                    <input class="to-do__input" id="task-input" type="text" placeholder="e.g. get milk">
+                </div>
+                <p class="to-do__text">Pick a category</p>
+                <div class="category__blocks">
+                    <label class="category__block">
+                        <input type="radio" name="category" class="category__btn" value="business">
+                        <span class="category__btn-custom business-btn"></span>
+                        Business
+                    </label>
+                    <label class="category__block">
+                        <input type="radio" name="category" class="category__btn" value="personal">
+                        <span class="category__btn-custom personal-btn"></span>
+                        Personal
+                    </label>
+                </div>
+                <div class="add-btn__block">
+                    <button class="add__btn font-f-400" onclick="addTask(event)">Add todo</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="to-do-task">
+        <div class="to-do__container">
+            <h4 class="font-f-400">TODO LIST</h4>
+            <div class="task-list__block"> 
+                <ul class="task-list" id="task-list">
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const taskInput = document.querySelector("#task-input");
+        const taskList = document.querySelector("#task-list");
+
+        function addTask(event) {
+            event.preventDefault();
+
+            const taskText = taskInput.value;
+            if (taskText.trim() === "") {
+                return;
+            }
+
+            const taskCategory = document.querySelector('input[name="category"]:checked');
+            const categoryValue = taskCategory ? taskCategory.value : "";
+
+            const li = document.createElement("li");
+            li.className = "task-list__task";
+            li.innerHTML = `
+                <label class="task-list__text">
+                    <input class="task__checkbox" type="checkbox" onclick="toggleComplete(this)">
+                    <div class="task__checkbox-custom"></div>
+                    <p class="task__text">${taskText}</p>
+                </label>
+                <div>
+                    <button class="task__btn edit-btn" onclick="editTask(this)">Edit</button>
+                    <button class="task__btn delete-btn" onclick="deleteTask(this)">Delete</button>
+                </div>`;
+
+            if (categoryValue === "business") {
+                li.classList.add("business-border");
+            } else if (categoryValue === "personal") {
+                li.classList.add("personal-border");
+            }
+
+            taskList.appendChild(li);
+
+            taskInput.value = "";
+        }
+
+        function deleteTask(button) {
+            const li = button.parentElement.parentElement;
+            li.remove();
+        }
+
+        function toggleComplete(checkbox) {
+            const text = checkbox.nextElementSibling.nextElementSibling;
+            if (checkbox.checked) {
+                text.style.textDecoration = "line-through";
+            } else {
+                text.style.textDecoration = "none";
+            }
+        }
+
+        function editTask(button) {
+            const text = button.parentElement.previousElementSibling.querySelector(".task__text");
+            text.contentEditable = true;
+            text.focus();
+
+            text.addEventListener("blur", function () {
+                text.contentEditable = false;
+            });
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="to-do-list">
+        <div class="to-do__container" id="to-do-list">
+            <h1 class="to-do__title">What's up,<span class="name" contenteditable="true" id="editableName"></span></h1>
+            <h3 class="to-do__subtitle font-f-400">CREATE A TODO</h3>
+            <p class="to-do__text">What's on your to-do list?</p>
+            
+            <form class="category">
+                <div>
+                    <input class="to-do__input" id="task-input" type="text" placeholder="e.g. get milk">
+                </div>
+                <p class="to-do__text">Pick a category</p>
+                <div class="category__blocks">
+                    <label class="category__block">
+                        <input type="radio" name="category" class="category__btn" value="business">
+                        <span class="category__btn-custom business-btn"></span>
+                        Business
+                    </label>
+                    <label class="category__block">
+                        <input type="radio" name="category" class="category__btn" value="personal">
+                        <span class="category__btn-custom personal-btn"></span>
+                        Personal
+                    </label>
+                </div>
+                <div class="add-btn__block">
+                    <button class="add__btn font-f-400" onclick="addTask(event)">Add todo</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="to-do-task">
+        <div class="to-do__container">
+            <h4 class="font-f-400">TODO LIST</h4>
+            <div class="task-list__block"> 
+                <ul class="task-list" id="task-list">
                 </ul>
             </div>
         </div>
